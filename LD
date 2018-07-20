@@ -1,2 +1,4 @@
 print("Hello world")
 print("testing123")
+import time
+time.sleep(10)
