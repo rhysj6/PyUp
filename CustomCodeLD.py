@@ -2,13 +2,12 @@
 
 #Please refer to the documentation if you are stuck
 def printc(text_to_print,no_of_prints):
-    for x in range(0,no_of_prints):
-        print(text_to_print)
+    print(text_to_print * no_of_prints)
 def scrclr():
-    printc("",50)
+    print("" *50)
 
 def scrclrc(lines):
-    printc("",lines)
+    print(""*lines)
 
 def wait(wt):
     import time
@@ -19,20 +18,15 @@ def w2f(filename,texttowrite):
     text1.write(texttowrite)
     text1.close()
 
-def rff(filename):
+def rff(filename,pos = True):
     text1 = open(filename, "w+")
-    string = text1.read()
+    if pos = True:
+        string = text1.read()
+
+    else:
+        string = text1.read(pos)
     text1.close
     return string
-def rff2(filename,pos):
-    text1 = open(filename, "r")
-    string = text1.read(pos)
-    text1.close
-    return string
-def str2int (string):
-    x = ord(string)
-    y= x-48
-    return y
 def encrypt(decrypted_string_var,key):
     encrypted_list_var = [""]
     for c in decrypted_string_var:
@@ -61,7 +55,7 @@ def checkLicenceC (filename,key,mode):
     else:
         if mode == "a":
             input("Licence Denied! Press Enter to exit.")
-        pritndskagf
+        pass
 def checkLicence (filename):
     text1 = open(filename, "r")
     Licence = text1.read()
@@ -80,13 +74,9 @@ def makeFolder(foldername,mode):
     os.mkdir(foldername)
     if mode=="a":
         os.chdir(foldername)
-#wip
+
 def getPageCode(page):
     import urllib.request
-    x = urllib.request.urlopen(page)
-    y = x.read()
-    return y
-
-
-
+    x = urllib.request.urlopen(page).read().decode("utf-8"))
+    return x
 
