@@ -114,3 +114,22 @@ def getPageCode(page):
     x = urllib.request.urlopen(page).read().decode("utf-8")
 
     return x
+
+
+def DowloadPy(FileName, VFileName, FileAddress, VFileAddress):
+    from urllib.request import Request, urlopen
+    webpage = str(urlopen(Request(VFileAddress)).read().decode("utf-8"))
+    try:
+            f = open(VFileName, 'r+')
+            currentVersion= str(f.read()) ##Reads the version file
+            f.close()
+    except:
+            currentVersion = "Not installed" ##If there is no file then this will fail the if statement
+    if webpage != currentVersion and currentVersion != "Beta" and currentVersion != "Don't Update": ##Checks if the current version is the same as the latest version 
+            f = open(VFileName, 'w+')
+            f.write(webpage) ##updates the version number
+            f.close()
+            webpage = str(urlopen(Request(FileAddress)).read().decode("utf-8"))
+            f = open(FileName, 'w+')
+            f.write(webpage) ##updates the main py file
+            f.close()
