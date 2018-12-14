@@ -1,6 +1,5 @@
-##---------------------------------------------------------------------------------------
 from urllib.request import Request, urlopen
-webpage = str(urlopen(Request("https://rhysj6.github.io/PyUp/CCLV")).read().decode("utf-8"))
+webpage = str(urlopen(Request("https://raw.githubusercontent.com/rhysj6/PyUp/master/CCLV")).read().decode("utf-8"))
 try:
 	f = open('CCVersion.txt', 'r+')
 	currentVersion= str(f.read()) ##Reads the version file
@@ -12,8 +11,7 @@ if webpage != currentVersion and currentVersion != "Beta" and currentVersion != 
 	f = open('CCVersion.txt', 'w+')
 	f.write(webpage) ##updates the version number
 	f.close()
-	webpage = str(urlopen(Request("https://rhysj6.github.io/PyUp/CustomCode")).read().decode("utf-8"))
+	webpage = str(urlopen(Request("https://raw.githubusercontent.com/rhysj6/PyUp/master/CustomCode")).read().decode("utf-8"))
 	f = open('CustomCode.py', 'w+')
 	f.write(webpage) ##updates the main py file
 	f.close()
-##---------------------------------------------------------------------------------------
