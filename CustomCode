@@ -94,16 +94,31 @@ def decrypt(encrypted_string_var,key):
 
 
 
+def load(fileName, keyName = "AlL"):
+    f2 = open("TMPexec.py", "w+")
+    f2.write("from "+ fileName+ " import saveData\n")
+    f2.close()
+    from TMPexec import saveData
+    if keyName == "AlL":
+        return saveData
+    else:
+        return saveData.get(keyName)
 
-def makeFolder(foldername,mode):
 
-    import os
 
-    os.mkdir(foldername)
-
-    if mode=="a":
-
-        os.chdir(foldername)
+def save(fileName, keyName, data, Type = "r"):
+    if Type == "r":
+        SaveData = {}
+        SaveData[keyName] = data
+        f = open(fileName+".py", "w+")
+        f.write("saveData = " + str(SaveData))
+        f.close()
+    elif Type == "a":
+        SaveData = load(fileName, "AlL")
+        SaveData[keyName] = data
+        f = open(fileName+".py", "w+")
+        f.write("saveData = " + str(SaveData))
+        f.close()
 
 
 
