@@ -94,31 +94,45 @@ def decrypt(encrypted_string_var,key):
 
 
 
+##Load
 def load(fileName, keyName = "AlL"):
-    f2 = open("TMPexec.py", "w+")
-    f2.write("from "+ fileName+ " import saveData\n")
-    f2.close()
+    f = open(fileName +".txt","r")
+    decryptedstring = ""
+    n1 = f.read().split(",")
+    f.close()
+    for i in n1:
+        try:
+            decryptedstring = decryptedstring + chr(int(math.sqrt(int(i))))
+        except:
+            pass
+    f = open("TMPexec.py","w+")
+    f.write(decryptedstring)
+    f.close()
+    del decryptedstring
     from TMPexec import saveData
     if keyName == "AlL":
         return saveData
     else:
-        return saveData.get(keyName)
+        return saveData[keyName]
+    del saveData
+    os.remove("TMPexec.py")
+
 
 
 
 def save(fileName, keyName, data, Type = "r"):
-    if Type == "r":
+    try:
+        SaveData = load(fileName)
+    except:
         SaveData = {}
-        SaveData[keyName] = data
-        f = open(fileName+".py", "w+")
-        f.write("saveData = " + str(SaveData))
-        f.close()
-    elif Type == "a":
-        SaveData = load(fileName, "AlL")
-        SaveData[keyName] = data
-        f = open(fileName+".py", "w+")
-        f.write("saveData = " + str(SaveData))
-        f.close()
+    SaveData[keyName] = data
+    string = "saveData = " + str(SaveData)
+    encryptedstring = ""
+    for i in string:
+        encryptedstring = encryptedstring + str(ord(i) **2)+","
+    f = open(fileName+".txt", "w+")
+    f.write(encryptedstring)
+    f.close()
 
 
 
